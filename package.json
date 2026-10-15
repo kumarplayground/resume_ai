@@ -1,0 +1,13 @@
+{
+  "name": "resume-ai-root",
+  "version": "1.0.0",
+  "description": "Align Resume Studio - LLM-Powered Resume Customizer & ATS Optimization Studio",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start",
+    "lint": "npm --prefix frontend run lint",
+    "backend": "cd backend && .venv\\Scripts\\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload"
+  }
+}

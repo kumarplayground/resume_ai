@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: #fcfcfc;
+    --foreground: #111827;
+    --card: #ffffff;
+    --card-border: #e5e7eb;
+    --primary-btn: #064e3b;
+    --primary-btn-hover: #047857;
+    --primary-btn-text: #ffffff;
+    --mint-accent: #10b981;
+  }
+
+  .dark {
+    --background: #090c0a;
+    --foreground: #f3f4f6;
+    --card: #111614;
+    --card-border: #1c2621;
+    --primary-btn: #34d399;
+    --primary-btn-hover: #2dd4bf;
+    --primary-btn-text: #052015;
+    --mint-accent: #34d399;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom delicate scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #27342d;
+}
+
+/* Document sheet paper feel */
+.resume-sheet {
+  background: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.dark .resume-sheet {
+  background: #111614;
+  border-color: #1c2621;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom dark card utility */
+.dark-card {
+  background-color: #ffffff;
+  border-color: #e5e7eb;
+}
+
+.dark .dark-card {
+  background-color: #111614;
+  border-color: #1c2621;
+}
+
+/* Dark recessed inputs/dropzones */
+.dark-recessed {
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.dark .dark-recessed {
+  background-color: #0b0f0d;
+  border-color: #1c2621;
+}
+
+/* Mint Action Button */
+.main-cta-button {
+  background-color: #064e3b;
+  color: #ffffff;
+}
+
+.main-cta-button:hover {
+  background-color: #047857;
+}
+
+.dark .main-cta-button {
+  background-color: #34d399;
+  color: #052216;
+  font-weight: 700;
+}
+
+.dark .main-cta-button:hover {
+  background-color: #2dd4bf;
+}
+
+/* Scanning laser line animation */
+@keyframes scanLine {
+  0% { top: 0%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.animate-scan-line {
+  animation: scanLine 3.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
