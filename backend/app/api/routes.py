@@ -327,6 +327,11 @@ def clean_download_cache():
     expired = [k for k, v in DOWNLOAD_CACHE.items() if v.get("expires_at", 0) < now]
     for k in expired:
         DOWNLOAD_CACHE.pop(k, None)
+    # Bounded cache: purge oldest entries if over capacity
+    if len(DOWNLOAD_CACHE) > 50:
+        sorted_keys = sorted(DOWNLOAD_CACHE.keys(), key=lambda k: DOWNLOAD_CACHE[k].get("expires_at", 0))
+        for old_key in sorted_keys[: len(DOWNLOAD_CACHE) - 50]:
+            DOWNLOAD_CACHE.pop(old_key, None)
 
 @router.post("/export/prepare")
 def export_prepare(payload: dict):
@@ -366,12 +371,13 @@ def export_prepare(payload: dict):
         content = generate_pdf_resume(resume)
         media_type = "application/pdf"
 
-    token = secrets.token_urlsafe(16)
+    # 256-bit cryptographically secure URL-safe token
+    token = secrets.token_urlsafe(32)
     DOWNLOAD_CACHE[token] = {
         "content": content,
         "media_type": media_type,
         "filename": filename,
-        "expires_at": time.time() + 300  # 5 minutes validity
+        "expires_at": time.time() + 300  # Strict 5 minutes validity
     }
 
     return {
@@ -392,10 +398,17 @@ def export_file_get(filename: str, token: str):
     
     entry = DOWNLOAD_CACHE.get(token)
     if not entry or entry.get("expires_at", 0) < time.time():
+        DOWNLOAD_CACHE.pop(token, None)
         raise HTTPException(status_code=404, detail="Download link expired or invalid. Please click download again.")
 
-    # Validate that requested filename matches cached file
-    safe_target_name = entry["filename"]
+    # Strict isolation check: validate that requested filename matches cached file
+    safe_target_name = entry.get("filename")
+    if filename != safe_target_name:
+        raise HTTPException(status_code=404, detail="File not found or token mismatch.")
+
+    # Accelerate post-access expiration to 30 seconds to prevent reuse
+    entry["expires_at"] = min(entry["expires_at"], time.time() + 30)
+
     return StreamingResponse(
         io.BytesIO(entry["content"]),
         media_type=entry["media_type"],

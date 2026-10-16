@@ -53,38 +53,46 @@ const EMPTY_RESUME: TailoredResume = {
   additional_information: [],
 };
 
-// Helper to reconstruct File object from stored base64 Data URL
-function dataURLtoFile(dataurl: string, filename: string, mimeType?: string): File | null {
+// List of all sensitive keys to purge from storage to guarantee zero persistence
+const SENSITIVE_STORAGE_KEYS = [
+  "align_saved_file_name",
+  "align_saved_file_size_kb",
+  "align_saved_file_data",
+  "align_saved_file_type",
+  "align_saved_resume_text",
+  "align_saved_job_description",
+  "align_saved_tailored_resume",
+  "align_saved_scores",
+  "align_saved_missing_keywords",
+  "align_saved_diff_items",
+  "align_saved_status_message",
+  "align_saved_is_ai_generated",
+  "align_saved_llm_provider",
+  "align_saved_cover_letter",
+];
+
+function purgeSensitiveStorage() {
+  if (typeof window === "undefined") return;
   try {
-    const arr = dataurl.split(",");
-    if (arr.length < 2) return null;
-    const match = arr[0].match(/:(.*?);/);
-    const mime = mimeType || (match ? match[1] : "application/octet-stream");
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+    for (const key of SENSITIVE_STORAGE_KEYS) {
+      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
     }
-    return new File([u8arr], filename, { type: mime });
-  } catch (err) {
-    console.warn("Could not restore file from storage:", err);
-    return null;
-  }
+  } catch {}
 }
 
 export default function Home() {
   // Theme state: light | dark | system (managed via useTheme hook)
   const { theme, setTheme: handleThemeChange } = useTheme();
 
-  // Inputs
+  // Inputs - In-memory only (Never stored in localStorage / sessionStorage)
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileSizeKb, setFileSizeKb] = useState<number | null>(null);
   const [resumeText, setResumeText] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
 
-  // Results & Outputs
+  // Results & Outputs - In-memory only
   const [scores, setScores] = useState<ScoreData>(EMPTY_SCORES);
   const [missingKeywords, setMissingKeywords] = useState<string[]>([]);
   const [tailoredResume, setTailoredResume] = useState<TailoredResume>(EMPTY_RESUME);
@@ -110,8 +118,11 @@ export default function Home() {
   const [jdError, setJdError] = useState<string | null>(null);
   const [globalError, setGlobalError] = useState<string | null>(null);
 
-  // Verify authentication on mount (first page open rule)
+  // Verify authentication and proactively purge any legacy sensitive storage on mount
   useEffect(() => {
+    // Proactively purge any residual resume data from older sessions
+    purgeSensitiveStorage();
+
     try {
       const stored = localStorage.getItem("align_auth_user");
       const hasCookie = document.cookie.includes("align_auth=true");
@@ -132,88 +143,28 @@ export default function Home() {
     }
   }, []);
 
-  // Handle Logout
+  // Handle Logout - completely clears in-memory state, cookies, and sensitive storage
   const handleLogout = () => {
     try {
       localStorage.removeItem("align_auth_user");
       document.cookie = "align_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      purgeSensitiveStorage();
     } catch {}
+    // Clear all sensitive in-memory state
+    setFile(null);
+    setFileName(null);
+    setFileSizeKb(null);
+    setResumeText("");
+    setJobDescription("");
+    setScores(EMPTY_SCORES);
+    setMissingKeywords([]);
+    setTailoredResume(EMPTY_RESUME);
+    setDiffItems([]);
+    setCoverLetterText("");
     window.location.replace("/login");
   };
 
-  // Restore saved persistent resume data from localStorage on mount
-  useEffect(() => {
-    try {
-      // 1. Saved File & Resume Text
-      const savedFileName = localStorage.getItem("align_saved_file_name");
-      const savedFileSizeKb = localStorage.getItem("align_saved_file_size_kb");
-      const savedFileData = localStorage.getItem("align_saved_file_data");
-      const savedFileType = localStorage.getItem("align_saved_file_type");
-      const savedResumeText = localStorage.getItem("align_saved_resume_text");
-
-      if (savedFileName) {
-        setFileName(savedFileName);
-        if (savedFileSizeKb) setFileSizeKb(parseFloat(savedFileSizeKb));
-        if (savedFileData) {
-          const restored = dataURLtoFile(savedFileData, savedFileName, savedFileType || undefined);
-          if (restored) setFile(restored);
-        }
-        if (savedResumeText) setResumeText(savedResumeText);
-      }
-
-      // 3. Saved Job Description
-      const savedJd = localStorage.getItem("align_saved_job_description");
-      if (savedJd !== null) {
-        setJobDescription(savedJd);
-      }
-
-      // 4. Saved Tailored Output
-      const savedTailored = localStorage.getItem("align_saved_tailored_resume");
-      if (savedTailored) {
-        try {
-          const parsed = JSON.parse(savedTailored);
-          if (parsed && (parsed.candidate_name || parsed.professional_summary)) {
-            setTailoredResume(parsed);
-          }
-        } catch {}
-      }
-
-      const savedScores = localStorage.getItem("align_saved_scores");
-      if (savedScores) {
-        try {
-          setScores(JSON.parse(savedScores));
-        } catch {}
-      }
-
-      const savedMissingKw = localStorage.getItem("align_saved_missing_keywords");
-      if (savedMissingKw) {
-        try {
-          setMissingKeywords(JSON.parse(savedMissingKw));
-        } catch {}
-      }
-
-      const savedDiff = localStorage.getItem("align_saved_diff_items");
-      if (savedDiff) {
-        try {
-          setDiffItems(JSON.parse(savedDiff));
-        } catch {}
-      }
-
-      const savedMsg = localStorage.getItem("align_saved_status_message");
-      if (savedMsg) setStatusMessage(savedMsg);
-
-      const savedIsAi = localStorage.getItem("align_saved_is_ai_generated");
-      if (savedIsAi !== null) setIsAiGenerated(savedIsAi === "true");
-
-      const savedProvider = localStorage.getItem("align_saved_llm_provider");
-      if (savedProvider) setLlmProviderUsed(savedProvider);
-    } catch (e) {
-      console.warn("Storage restoration error:", e);
-    }
-  }, []);
-
-
-  // Handle file upload and persist data
+  // Handle file upload (Kept strictly in memory)
   const handleFileSelect = (selectedFile: File) => {
     setFile(selectedFile);
     setFileName(selectedFile.name);
@@ -229,32 +180,9 @@ export default function Home() {
     setScores(EMPTY_SCORES);
     setMissingKeywords([]);
     setDiffItems([]);
+    setCoverLetterText("");
     setStatusMessage("Resume uploaded. Click 'Tailor Resume to Job' to generate your customized resume.");
-    try {
-      localStorage.removeItem("align_saved_tailored_resume");
-      localStorage.removeItem("align_saved_scores");
-      localStorage.removeItem("align_saved_missing_keywords");
-      localStorage.removeItem("align_saved_diff_items");
-    } catch {}
-
-    try {
-      localStorage.setItem("align_saved_file_name", selectedFile.name);
-      localStorage.setItem("align_saved_file_size_kb", String(sizeKb));
-      localStorage.setItem("align_saved_file_type", selectedFile.type || "application/pdf");
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const dataUrl = reader.result as string;
-          localStorage.setItem("align_saved_file_data", dataUrl);
-        } catch (e) {
-          console.warn("Could not save file data to localStorage:", e);
-        }
-      };
-      reader.readAsDataURL(selectedFile);
-    } catch (e) {
-      console.warn("Failed saving file info to localStorage:", e);
-    }
+    purgeSensitiveStorage();
   };
 
   // Handle file removal
@@ -267,32 +195,20 @@ export default function Home() {
     setScores(EMPTY_SCORES);
     setMissingKeywords([]);
     setDiffItems([]);
+    setCoverLetterText("");
     setStatusMessage("Upload a resume to get started");
     setResumeError(null);
     setGlobalError(null);
-    try {
-      localStorage.removeItem("align_saved_file_name");
-      localStorage.removeItem("align_saved_file_size_kb");
-      localStorage.removeItem("align_saved_file_data");
-      localStorage.removeItem("align_saved_file_type");
-      localStorage.removeItem("align_saved_resume_text");
-      localStorage.removeItem("align_saved_tailored_resume");
-      localStorage.removeItem("align_saved_scores");
-      localStorage.removeItem("align_saved_missing_keywords");
-      localStorage.removeItem("align_saved_diff_items");
-    } catch {}
+    purgeSensitiveStorage();
   };
 
-  // Handle job description changes and persist
+  // Handle job description changes (Kept strictly in memory)
   const handleJobDescriptionChange = (val: string) => {
     setJobDescription(val);
     if (val.trim().length >= 50) {
       setJdError(null);
       if (!resumeError) setGlobalError(null);
     }
-    try {
-      localStorage.setItem("align_saved_job_description", val);
-    } catch {}
   };
 
   // Main Tailor Action
@@ -357,28 +273,10 @@ export default function Home() {
 
       if (res.cover_letter) {
         setCoverLetterText(res.cover_letter);
-        try {
-          localStorage.setItem("align_saved_cover_letter", res.cover_letter);
-        } catch {}
       }
 
       if (res.original_resume_text) {
         setResumeText(res.original_resume_text);
-        try {
-          localStorage.setItem("align_saved_resume_text", res.original_resume_text);
-        } catch {}
-      }
-
-      try {
-        localStorage.setItem("align_saved_scores", JSON.stringify(res.scores));
-        localStorage.setItem("align_saved_missing_keywords", JSON.stringify(res.missing_keywords));
-        localStorage.setItem("align_saved_tailored_resume", JSON.stringify(res.tailored_resume));
-        localStorage.setItem("align_saved_diff_items", JSON.stringify(res.diff_items));
-        localStorage.setItem("align_saved_status_message", msg);
-        localStorage.setItem("align_saved_is_ai_generated", String(res.is_ai_generated));
-        localStorage.setItem("align_saved_llm_provider", res.llm_provider);
-      } catch (e) {
-        console.warn("Failed saving tailored output to localStorage:", e);
       }
 
       // Trigger celebratory confetti on success

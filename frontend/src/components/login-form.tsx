@@ -35,6 +35,28 @@ export function LoginForm({
       );
       // Set 7-day cookie for Next.js middleware routing
       document.cookie = "align_auth=true; path=/; max-age=604800; SameSite=Lax";
+
+      // Purge any residual sensitive resume/JD storage from prior sessions
+      const SENSITIVE_STORAGE_KEYS = [
+        "align_saved_file_name",
+        "align_saved_file_size_kb",
+        "align_saved_file_data",
+        "align_saved_file_type",
+        "align_saved_resume_text",
+        "align_saved_job_description",
+        "align_saved_tailored_resume",
+        "align_saved_scores",
+        "align_saved_missing_keywords",
+        "align_saved_diff_items",
+        "align_saved_status_message",
+        "align_saved_is_ai_generated",
+        "align_saved_llm_provider",
+        "align_saved_cover_letter",
+      ];
+      for (const k of SENSITIVE_STORAGE_KEYS) {
+        localStorage.removeItem(k);
+        sessionStorage.removeItem(k);
+      }
     } catch (e) {
       console.warn("Storage error saving auth:", e);
     }

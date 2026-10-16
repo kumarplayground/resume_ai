@@ -193,6 +193,9 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
             onClick={(e) => {
               e.stopPropagation();
               clearError();
+              if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+              }
               onRemoveFile();
             }}
             title="Remove file"
