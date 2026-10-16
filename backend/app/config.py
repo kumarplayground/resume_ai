@@ -37,7 +37,7 @@ class Settings:
 
     @property
     def LLM_MODEL(self) -> str:
-        return os.getenv("LLM_MODEL", "gemini-2.0-flash").strip()
+        return os.getenv("LLM_MODEL", "gemini-3.8-flash").strip()
 
     # Server & CORS
     HOST: str = os.getenv("HOST", "0.0.0.0")
