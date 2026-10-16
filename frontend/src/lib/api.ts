@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2026 Rahul Kumar. All rights reserved.
+ * Proprietary and confidential. See LICENSE in the project root for details.
+ */
+
 import { TailorResponse, SampleDataResponse, CoverLetterResponse, TailoredResume } from "./types";
 
 const getApiBaseUrl = (): string => {

@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Rahul Kumar. All rights reserved.
+# Proprietary and confidential. See LICENSE in the project root for details.
+
 import os
 from pathlib import Path
 from typing import List
@@ -10,6 +13,7 @@ load_dotenv(dotenv_path=env_path)
 class Settings:
     PROJECT_NAME: str = "Align Resume Studio API"
     VERSION: str = "1.0.0"
+    PROJECT_PROVENANCE_ID: str = "align-resume-studio-core-2026-9a84b2c1"
     
     @property
     def GEMINI_API_KEY(self) -> str:

@@ -8,7 +8,7 @@
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC?style=flat&logo=tailwind-css)
 ![Google Gemini](https://img.shields.io/badge/Gemini%202.0%20Flash-AI-4285F4?style=flat&logo=google)
 ![Groq](https://img.shields.io/badge/Groq-Llama%203.3%2070B-orange?style=flat)
-![License](https://img.shields.io/badge/License-MIT-emerald?style=flat)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=flat)
 
 ---
 
@@ -272,5 +272,27 @@ npm run dev
 
 ---
 
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
+## 🛡️ Authorship, Copyright & Integrity Protection
+
+- **Author & Original Creator**: [Rahul Kumar](https://github.com/kumarplayground)
+- **Copyright**: © 2026 Rahul Kumar. All rights reserved.
+- **License**: [Proprietary - All Rights Reserved](LICENSE)
+- **Canonical Provenance ID**: `align-resume-studio-core-2026-9a84b2c1`
+
+### Ownership & Copy Detection Documentation
+- **[Copyright & Ownership Statement](COPYRIGHT.md)**: Formal statement of authorship, retained moral rights, and license conditions.
+- **[Git Provenance & Commit Signing Guide](docs/OWNERSHIP-PROTECTION.md)**: How to configure GitHub-verified SSH/GPG commit signing and create signed release tags.
+- **[Copy Detection & Audit Guide](docs/COPY-DETECTION.md)**: Strategies for monitoring downstream derivatives, searching distinctive code patterns, and running local similarity audits.
+
+### Built-in Integrity & Comparison Utilities
+```bash
+# Generate deterministic SHA-256 source code fingerprints
+npm run fingerprint
+
+# Preserve local Git snapshot and ownership evidence report
+npm run evidence
+
+# Compare source tree against an external repository or directory
+npm run compare -- <dirA> <dirB>
+```
+

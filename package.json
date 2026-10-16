@@ -8,6 +8,10 @@
     "build": "npm --prefix frontend run build",
     "start": "npm --prefix frontend start",
     "lint": "npm --prefix frontend run lint",
-    "backend": "cd backend && .venv\\Scripts\\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload"
-  }
+    "backend": "cd backend && .venv\\Scripts\\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload",
+    "fingerprint": "node scripts/fingerprint.mjs",
+    "evidence": "node scripts/create-evidence.mjs",
+    "compare": "node scripts/compare-sources.mjs"
+  },
+  "license": "UNLICENSED"
 }

@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Copyright (c) 2026 Rahul Kumar. All rights reserved.
+ * Proprietary and confidential. See LICENSE in the project root for details.
+ */
+
 import React, { useRef, useState } from "react";
 import { FileText, Check, X, Upload, AlertCircle } from "lucide-react";
 

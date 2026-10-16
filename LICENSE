@@ -1,21 +1,50 @@
-MIT License
+PROPRIETARY AND CONFIDENTIAL SOFTWARE LICENSE
 
-Copyright (c) 2026 Rahul Kumar
+Copyright (c) 2026 Rahul Kumar. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software, source code, designs, and associated documentation ("Software") 
+are the exclusive, proprietary intellectual property of Rahul Kumar.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+TERMS AND CONDITIONS OF USE:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. RESTRICTIONS ON USE:
+   Except as expressly authorized in advance and in writing by Rahul Kumar, 
+   or where mandatory applicable law or another valid written agreement 
+   specifically provides otherwise, you may not:
+   a. Copy, reproduce, redistribute, republish, mirror, or broadcast any 
+      portion of this Software in source or binary form, in whole or in part;
+   b. Modify, alter, adapt, translate, reverse engineer, decompile, disassemble, 
+      or create derivative works based upon this Software;
+   c. Sublicense, lease, rent, loan, sell, assign, distribute, host, outsource, 
+      or otherwise commercially exploit or make available this Software to 
+      any third party.
+
+2. NO IMPLIED TRANSFER OF RIGHTS:
+   No license, title, copyright, trademark, or ownership right in this 
+   Software is transferred, assigned, or granted by implication, estoppel, or 
+   otherwise, except as explicitly set forth herein.
+
+3. THIRD-PARTY LIBRARIES AND DEPENDENCIES:
+   This Software may utilize, import, link against, or bundle third-party 
+   open-source libraries, frameworks, or dependencies. Copyright and 
+   intellectual property rights in third-party software are retained by 
+   their respective authors and licensors. Nothing in this proprietary 
+   license claims ownership of, or alters the licensing terms governing, 
+   third-party libraries, dependencies, or components that are not owned 
+   by Rahul Kumar.
+
+4. DISCLAIMER OF WARRANTIES:
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" AND WITHOUT 
+   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+   IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, 
+   AND NON-INFRINGEMENT. ALL SUCH WARRANTIES ARE EXPRESSLY DISCLAIMED.
+
+5. LIMITATION OF LIABILITY:
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY DIRECT, 
+   INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+   HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+   IN ANY WAY OUT OF THE USE OF OR INABILITY TO USE THIS SOFTWARE, EVEN 
+   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

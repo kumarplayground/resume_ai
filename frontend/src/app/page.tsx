@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * Copyright (c) 2026 Rahul Kumar. All rights reserved.
+ * Proprietary and confidential. See LICENSE in the project root for details.
+ *
+ * Project Provenance Identifier (documented integrity marker; see COPYRIGHT.md):
+ */
+export const PROJECT_PROVENANCE_ID = "align-resume-studio-core-2026-9a84b2c1";
+
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import {

@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Rahul Kumar. All rights reserved.
+# Proprietary and confidential. See LICENSE in the project root for details.
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
