@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND_URL = process.env.BACKEND_INTERNAL_URL || "http://127.0.0.1:8000";
+const getBackendUrl = (): string => {
+  if (process.env.BACKEND_INTERNAL_URL) {
+    return process.env.BACKEND_INTERNAL_URL.trim().replace(/\/+$/, "");
+  }
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/+$/, "").replace(/\/api$/, "");
+  }
+  return "http://127.0.0.1:8000";
+};
+
+const BACKEND_URL = getBackendUrl();
 
 export async function GET(
   req: NextRequest,

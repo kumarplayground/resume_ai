@@ -1,6 +1,13 @@
 import { TailorResponse, SampleDataResponse, CoverLetterResponse, TailoredResume } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const getApiBaseUrl = (): string => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
+  if (!envUrl) return "http://localhost:8000/api";
+  const clean = envUrl.replace(/\/+$/, "");
+  return clean.endsWith("/api") ? clean : `${clean}/api`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export async function fetchSampleData(): Promise<SampleDataResponse> {
   try {

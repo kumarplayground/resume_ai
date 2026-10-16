@@ -42,12 +42,25 @@ class Settings:
     # Server & CORS
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
-    ALLOWED_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        os.getenv("FRONTEND_URL", "http://localhost:3000"),
-        "*"
-    ]
+    @property
+    def ALLOWED_ORIGINS(self) -> List[str]:
+        origins = [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "*"
+        ]
+        frontend_url = os.getenv("FRONTEND_URL", "").strip()
+        if frontend_url:
+            origins.append(frontend_url)
+            origins.append(frontend_url.rstrip("/"))
+        raw_allowed = os.getenv("ALLOWED_ORIGINS", "").strip()
+        if raw_allowed:
+            for item in raw_allowed.split(","):
+                clean = item.strip()
+                if clean:
+                    origins.append(clean)
+                    origins.append(clean.rstrip("/"))
+        return list(dict.fromkeys(origins))
 
 settings = Settings()
 
