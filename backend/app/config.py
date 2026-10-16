@@ -48,7 +48,7 @@ class Settings:
             "http://localhost:3000",
             "http://127.0.0.1:3000",
             "https://resume-ai-five-smoky.vercel.app",
-            "*"
+            "*",
         ]
         frontend_url = os.getenv("FRONTEND_URL", "").strip()
         if frontend_url:
