@@ -10,9 +10,9 @@ interface ScoreCardsProps {
 
 export const ScoreCards: React.FC<ScoreCardsProps> = ({ scores }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
       {/* Match Score Card */}
-      <div className="bg-white dark:bg-[#111614] border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-5 shadow-xs transition-colors">
+      <div className="bg-white dark:bg-[#111614] border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-4 sm:p-5 shadow-xs transition-colors">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
             Match score
@@ -30,7 +30,7 @@ export const ScoreCards: React.FC<ScoreCardsProps> = ({ scores }) => {
             <span className="text-lg font-bold text-gray-400">%</span>
           </div>
 
-          <span className="text-xs font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-50 dark:bg-[#14291f] border border-emerald-200/90 dark:border-[#1d4430] px-2.5 py-0.5 rounded-full">
+          <span className="text-[11px] sm:text-xs font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-50 dark:bg-[#14291f] border border-emerald-200/90 dark:border-[#1d4430] px-2 sm:px-2.5 py-0.5 rounded-full shrink-0">
             {scores.match_badge}
           </span>
         </div>
@@ -49,7 +49,7 @@ export const ScoreCards: React.FC<ScoreCardsProps> = ({ scores }) => {
       </div>
 
       {/* ATS Friendly Card */}
-      <div className="bg-white dark:bg-[#111614] border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-5 shadow-xs transition-colors">
+      <div className="bg-white dark:bg-[#111614] border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-4 sm:p-5 shadow-xs transition-colors">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
             ATS-friendly
@@ -67,7 +67,7 @@ export const ScoreCards: React.FC<ScoreCardsProps> = ({ scores }) => {
             <span className="text-sm font-semibold text-gray-400">/ 100</span>
           </div>
 
-          <span className="text-xs font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-50 dark:bg-[#14291f] border border-emerald-200/90 dark:border-[#1d4430] px-2.5 py-0.5 rounded-full">
+          <span className="text-[11px] sm:text-xs font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-50 dark:bg-[#14291f] border border-emerald-200/90 dark:border-[#1d4430] px-2 sm:px-2.5 py-0.5 rounded-full shrink-0">
             {scores.ats_badge}
           </span>
         </div>

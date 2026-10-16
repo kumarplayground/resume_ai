@@ -25,32 +25,32 @@ export const DownloadBar: React.FC<DownloadBarProps> = ({
   );
 
   return (
-    <div className="border border-gray-200/90 dark:border-[#1c2621] bg-white dark:bg-[#111614] rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs transition-colors">
+    <div className="border border-gray-200/90 dark:border-[#1c2621] bg-white dark:bg-[#111614] rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-xs transition-colors">
       {/* Left: Status */}
-      <div className="flex items-center gap-2 text-xs font-semibold">
+      <div className="flex items-center justify-center sm:justify-start gap-2 text-xs font-semibold text-center sm:text-left">
         {isReady ? (
           <>
-            <Check className="w-4 h-4 text-emerald-600 dark:text-[#34d399] stroke-[2.5]" />
+            <Check className="w-4 h-4 text-emerald-600 dark:text-[#34d399] stroke-[2.5] shrink-0" />
             <span className="text-gray-800 dark:text-gray-200">Ready for your review & download</span>
           </>
         ) : (
           <>
-            <Clock className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+            <Clock className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0" />
             <span className="text-gray-500 dark:text-gray-400">Tailor resume to enable export</span>
           </>
         )}
       </div>
 
       {/* Right: Download Action with Format Selector */}
-      <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+      <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-end gap-2.5 w-full sm:w-auto">
         {/* Format Selector Pills */}
-        <div className="flex items-center p-0.5 rounded-lg border border-gray-200 dark:border-[#1c2621] bg-gray-50 dark:bg-[#0b0f0d]">
+        <div className="flex items-center justify-center p-0.5 rounded-lg border border-gray-200 dark:border-[#1c2621] bg-gray-50 dark:bg-[#0b0f0d] shrink-0">
           {formats.map((fmt) => (
             <button
               key={fmt}
               id={`format-btn-${fmt}`}
               onClick={() => setSelectedFormat(fmt)}
-              className={`px-2.5 py-1 text-xs font-semibold rounded-md uppercase transition cursor-pointer ${
+              className={`flex-1 xs:flex-initial px-3 py-1.5 sm:py-1 text-xs font-semibold rounded-md uppercase transition cursor-pointer min-h-[32px] flex items-center justify-center ${
                 selectedFormat === fmt
                   ? "bg-white dark:bg-[#19241d] text-emerald-700 dark:text-[#34d399] shadow-2xs font-bold"
                   : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -67,13 +67,13 @@ export const DownloadBar: React.FC<DownloadBarProps> = ({
           onClick={() => onDownload(selectedFormat)}
           disabled={isDownloading || !isReady}
           title={!isReady ? "Please tailor your resume first before downloading." : "Download your tailored resume"}
-          className={`font-semibold text-xs sm:text-sm px-4 py-2 rounded-xl flex items-center gap-2 shadow-2xs transition ${
+          className={`w-full xs:w-auto justify-center font-semibold text-xs sm:text-sm px-4 py-2.5 sm:py-2 min-h-[40px] rounded-xl flex items-center gap-2 shadow-2xs transition active:scale-[0.99] ${
             isReady
               ? "bg-emerald-600 hover:bg-emerald-700 dark:bg-[#131916] dark:hover:bg-[#1a231e] text-white dark:text-white border border-emerald-600 dark:border-[#1f2823] cursor-pointer"
               : "bg-gray-100 dark:bg-[#121714] text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-[#1c241f] cursor-not-allowed opacity-60"
           }`}
         >
-          <Download className={`w-4 h-4 ${isReady ? "text-white dark:text-[#34d399]" : "text-gray-400 dark:text-gray-500"}`} />
+          <Download className={`w-4 h-4 shrink-0 ${isReady ? "text-white dark:text-[#34d399]" : "text-gray-400 dark:text-gray-500"}`} />
           <span>{isDownloading ? "Downloading..." : "Download resume"}</span>
           <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${
             isReady 

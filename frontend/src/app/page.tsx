@@ -537,16 +537,16 @@ ${tailoredResume.candidate_name || "Candidate"}`);
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-10">
         {/* Breadcrumb & Bonus Feature Row */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-2">
-          <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-gray-400 dark:text-gray-500 uppercase select-none">
+        <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2.5 pb-2">
+          <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-bold tracking-wider text-gray-400 dark:text-gray-500 uppercase select-none">
             <span>WORKSPACE</span>
             <span>&gt;</span>
             <span>RESUME CUSTOMIZER</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full xs:w-auto justify-between xs:justify-end">
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-[#111614] border border-gray-200 dark:border-[#1c2621] px-2.5 py-1 rounded-full shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#34d399] animate-pulse" />
               Resume Studio
@@ -558,7 +558,8 @@ ${tailoredResume.candidate_name || "Candidate"}`);
               className="text-xs font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-50 dark:bg-[#14291f] hover:bg-emerald-100 dark:hover:bg-[#1b3a2c] border border-emerald-200 dark:border-[#1d4430] px-3 py-1 rounded-full flex items-center gap-1.5 cursor-pointer transition"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>Cover Letter Generator</span>
+              <span className="hidden xs:inline">Cover Letter</span>
+              <span className="xs:hidden">Cover Letter</span>
               <span className="text-[10px] bg-emerald-200/80 dark:bg-[#1b4332] px-1.5 rounded text-emerald-900 dark:text-[#34d399]">
                 Bonus
               </span>
@@ -567,7 +568,7 @@ ${tailoredResume.candidate_name || "Candidate"}`);
         </div>
 
         {/* Two-Column Responsive Studio Layout */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="mt-4 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
           {/* LEFT COLUMN: Inputs (01 Resume Upload + 02 Job Description + Action Button) */}
           <div className="lg:col-span-5 space-y-4">
             {/* Card 1: Resume Upload */}
@@ -620,7 +621,7 @@ ${tailoredResume.candidate_name || "Candidate"}`);
                 id="tailor-resume-btn"
                 onClick={handleTailorResume}
                 disabled={isTailoring}
-                className="w-full bg-[#064e3b] dark:bg-[#34d399] hover:bg-[#047857] dark:hover:bg-[#2dd4bf] active:bg-[#065f46] text-white dark:text-[#052216] font-semibold dark:font-bold py-3.5 px-6 rounded-2xl flex items-center justify-between shadow-sm transition active:scale-[0.995] cursor-pointer disabled:opacity-60"
+                className="w-full min-h-[48px] bg-[#064e3b] dark:bg-[#34d399] hover:bg-[#047857] dark:hover:bg-[#2dd4bf] active:bg-[#065f46] text-white dark:text-[#052216] font-semibold dark:font-bold py-3.5 px-4 sm:px-6 rounded-2xl flex items-center justify-between shadow-sm transition active:scale-[0.995] cursor-pointer disabled:opacity-60"
               >
                 <div className="flex items-center gap-2 text-sm sm:text-base">
                   {isTailoring ? (
@@ -678,7 +679,7 @@ ${tailoredResume.candidate_name || "Candidate"}`);
         </div>
 
         {/* Footer */}
-        <footer className="mt-14 pt-6 border-t border-gray-200/80 dark:border-[#1c2621] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-500">
+        <footer className="mt-10 sm:mt-14 pt-5 sm:pt-6 border-t border-gray-200/80 dark:border-[#1c2621] flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-gray-400 dark:text-gray-500 text-center sm:text-left">
           <span>Made for your next move.</span>
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />

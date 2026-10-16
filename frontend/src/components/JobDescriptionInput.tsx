@@ -114,7 +114,7 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({
 
   return (
     <div
-      className={`w-full bg-white dark:bg-[#111614] border rounded-2xl p-5 shadow-xs transition-colors ${
+      className={`w-full bg-white dark:bg-[#111614] border rounded-2xl p-4 sm:p-5 shadow-xs transition-colors ${
         errorMessage
           ? "border-rose-300 dark:border-rose-900/60"
           : "border-gray-200/90 dark:border-[#1c2621]"
@@ -131,7 +131,7 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({
       />
 
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 sm:mb-3">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-bold tracking-wider text-emerald-800 dark:text-[#34d399] bg-emerald-100 dark:bg-[#14291f] border border-emerald-200 dark:border-[#1d4430] px-1.5 py-0.5 rounded-md">
             02
@@ -198,7 +198,7 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({
       )}
 
       {/* Footer Info */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mt-2.5 text-[11px] text-gray-400 dark:text-gray-500">
+      <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 mt-2.5 text-[11px] text-gray-400 dark:text-gray-500">
         <div className="flex items-center gap-2">
           <span className={isTooShort ? "text-amber-600 dark:text-amber-400 font-medium" : ""}>
             {isTooShort ? "Minimum 50 characters required" : "Paste job description"}

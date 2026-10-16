@@ -23,7 +23,7 @@ export default function LoginPage() {
     <div className="relative min-h-svh w-full flex flex-col justify-between bg-[#fcfcfc] dark:bg-[#090c0a] text-gray-900 dark:text-gray-100 transition-colors">
       {/* Top Navigation Bar with Brand and Theme Switcher */}
       <header className="w-full border-b border-gray-200/80 dark:border-[#1c2621] bg-white/80 dark:bg-[#090c0a]/80 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between">
           {/* Brand Logo */}
           <div className="flex items-center gap-2 select-none">
             <div className="w-6 h-6 rounded-md bg-emerald-600 dark:bg-[#10b981] flex items-center justify-center text-white shadow-xs">
@@ -43,7 +43,7 @@ export default function LoginPage() {
             <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               align.
             </span>
-            <span className="text-[10px] font-semibold tracking-wider text-gray-500 dark:text-gray-400 uppercase px-2 py-0.5 rounded-full border border-gray-200 dark:border-[#1c2621] bg-gray-50 dark:bg-[#111614]">
+            <span className="hidden sm:inline-flex text-[10px] font-semibold tracking-wider text-gray-500 dark:text-gray-400 uppercase px-2 py-0.5 rounded-full border border-gray-200 dark:border-[#1c2621] bg-gray-50 dark:bg-[#111614]">
               RESUME STUDIO
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
       </header>
 
       {/* Main Login Card Section */}
-      <main className="flex flex-1 w-full items-center justify-center p-6 sm:p-10 relative overflow-hidden">
+      <main className="flex flex-1 w-full items-center justify-center p-4 sm:p-10 relative overflow-hidden">
         {/* Subtle Ambient Background Glows */}
         <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 dark:bg-[#34d399]/5 rounded-full blur-3xl" />
         

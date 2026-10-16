@@ -11,7 +11,7 @@ export const KeywordsAlert: React.FC<KeywordsAlertProps> = ({ keywords }) => {
   if (!keywords || keywords.length === 0) return null;
 
   return (
-    <div className="bg-[#fffbeb] dark:bg-[#17140e] border border-[#fde68a] dark:border-[#2e2518] rounded-2xl p-5 transition-colors">
+    <div className="bg-[#fffbeb] dark:bg-[#17140e] border border-[#fde68a] dark:border-[#2e2518] rounded-2xl p-4 sm:p-5 transition-colors">
       <div className="flex items-center gap-2 text-amber-900 dark:text-[#fbbf24]">
         <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-[#fbbf24] shrink-0" />
         <h3 className="font-semibold text-xs sm:text-sm">

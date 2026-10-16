@@ -99,29 +99,29 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
   return (
     <div>
       {/* Header Bar with Diff View Toggle & Effect Preview Button */}
-      <div className="flex items-center justify-between mb-3 px-1">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3 px-1">
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-gray-900 dark:text-white text-base">
             Resume preview
           </h2>
           <span className="text-[11px] font-semibold text-emerald-800 dark:text-[#34d399] bg-emerald-100/80 dark:bg-[#14291f] border border-transparent dark:border-[#1d4430] px-2 py-0.5 rounded-full">
-            {showLoader ? "Tailoring in progress..." : "Tailored"}
+            {showLoader ? "Tailoring..." : "Tailored"}
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Manual Effect Demo Toggle Button */}
           <button
             type="button"
             onClick={() => setPreviewEffectActive(!previewEffectActive)}
-            className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border transition cursor-pointer ${
+            className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 min-h-[30px] rounded-full border transition cursor-pointer ${
               previewEffectActive
                 ? "bg-emerald-500/20 text-emerald-700 dark:text-[#34d399] border-emerald-500/40"
                 : "bg-gray-100 dark:bg-[#14291f] text-gray-600 dark:text-gray-300 border-gray-200 dark:border-[#1c2621] hover:border-emerald-500/40"
             }`}
             title="Toggle Aceternity AI scanning effect"
           >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-500 dark:text-[#34d399]" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-500 dark:text-[#34d399] shrink-0" />
             <span>{previewEffectActive ? "Stop Effect" : "Preview Effect"}</span>
           </button>
 
@@ -129,22 +129,22 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
           {hasResumeContent && (
             <div
               onClick={() => setDiffViewActive(!diffViewActive)}
-              className="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer select-none"
+              className="flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer select-none"
             >
-              <span>Diff view {diffViewActive ? "ON" : "OFF"}</span>
+              <span>Diff {diffViewActive ? "ON" : "OFF"}</span>
               <button
                 id="diff-view-toggle"
                 type="button"
                 role="switch"
                 aria-checked={diffViewActive}
                 aria-label="Toggle Diff View"
-                className={`w-10 h-5.5 rounded-full transition-colors relative cursor-pointer focus:outline-none shrink-0 ${
+                className={`w-9 sm:w-10 h-5 sm:h-5.5 rounded-full transition-colors relative cursor-pointer focus:outline-none shrink-0 ${
                   diffViewActive ? "bg-[#047857] dark:bg-[#34d399]" : "bg-gray-300 dark:bg-zinc-700"
                 }`}
               >
                 <span
-                  className={`block w-4 h-4 bg-white dark:bg-zinc-950 rounded-full transition-transform absolute top-0.5 left-0.5 shadow-xs pointer-events-none ${
-                    diffViewActive ? "translate-x-4.5" : "translate-x-0"
+                  className={`block w-3.5 sm:w-4 h-3.5 sm:h-4 bg-white dark:bg-zinc-950 rounded-full transition-transform absolute top-0.5 left-0.5 shadow-xs pointer-events-none ${
+                    diffViewActive ? "translate-x-4 sm:translate-x-4.5" : "translate-x-0"
                   }`}
                 />
               </button>
@@ -155,7 +155,7 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
 
       {/* Resume Document Paper Card Sheet */}
       <div
-        className={`resume-sheet border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-6 sm:p-9 relative bg-white dark:bg-[#111614] shadow-xs transition-colors overflow-hidden min-h-[560px] ${
+        className={`resume-sheet border border-gray-200/90 dark:border-[#1c2621] rounded-2xl p-4 sm:p-7 md:p-9 relative bg-white dark:bg-[#111614] shadow-xs transition-colors overflow-hidden min-h-[500px] sm:min-h-[560px] ${
           showLoader ? "ring-2 ring-emerald-500/40" : ""
         }`}
       >
@@ -181,17 +181,17 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
             />
 
             {/* Step notification badge */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/85 dark:bg-[#090c0a]/90 backdrop-blur-md border border-[#34d399]/40 text-white shadow-2xl">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/85 dark:bg-[#090c0a]/90 backdrop-blur-md border border-[#34d399]/40 text-white shadow-2xl max-w-[92vw]">
               <span className="w-2 h-2 rounded-full bg-[#34d399] animate-ping shrink-0" />
-              <span className="text-xs font-semibold tracking-wide text-emerald-300 whitespace-nowrap">
+              <span className="text-[11px] sm:text-xs font-semibold tracking-wide text-emerald-300 text-center truncate">
                 {loadingStepText || (previewEffectActive ? "Aceternity AI scanning effect active" : "Customizing resume to job description with AI...")}
               </span>
             </div>
           </div>
         )}
 
-        {/* Top-Right Label Watermark */}
-        <div className="absolute top-7 right-7 text-[10px] font-bold tracking-widest uppercase text-gray-400 dark:text-gray-500 select-none">
+        {/* Top-Right Label Watermark (hidden on compact mobile to prevent text clash) */}
+        <div className="hidden sm:block absolute top-7 right-7 text-[10px] font-bold tracking-widest uppercase text-gray-400 dark:text-gray-500 select-none">
           TAILORED RESUME
         </div>
 
@@ -264,21 +264,21 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
           {/* Contact Information Row */}
           <div className="flex flex-wrap items-center gap-y-1.5 gap-x-4 mt-3 text-xs text-gray-500 dark:text-gray-400">
             {resume.email && (
-              <div className="flex items-center gap-1.5 hover:text-gray-700 dark:hover:text-gray-200 transition">
+              <div className="flex items-center gap-1.5 hover:text-gray-700 dark:hover:text-gray-200 transition min-w-0">
                 <Mail className="w-3.5 h-3.5 shrink-0 text-gray-400 dark:text-gray-500" />
-                <span>{resume.email}</span>
+                <span className="break-all">{resume.email}</span>
               </div>
             )}
             {resume.location && (
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 min-w-0">
                 <MapPin className="w-3.5 h-3.5 shrink-0 text-gray-400 dark:text-gray-500" />
-                <span>{resume.location}</span>
+                <span className="break-words">{resume.location}</span>
               </div>
             )}
             {resume.linkedin && (
-              <div className="flex items-center gap-1.5 hover:text-emerald-700 dark:hover:text-[#34d399] transition">
+              <div className="flex items-center gap-1.5 hover:text-emerald-700 dark:hover:text-[#34d399] transition min-w-0">
                 <ExternalLink className="w-3.5 h-3.5 shrink-0 text-gray-400 dark:text-gray-500" />
-                <span>{resume.linkedin}</span>
+                <span className="break-all">{resume.linkedin}</span>
               </div>
             )}
 
@@ -367,12 +367,12 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
               {resume.experience_entries.map((entry, idx) => (
                 <div key={idx}>
                   {/* Role Title and Duration Row */}
-                  <div className="flex items-baseline justify-between gap-2">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-2">
                     <h4 className="font-bold text-gray-900 dark:text-white text-xs sm:text-sm">
                       {entry.title}
                     </h4>
                     {entry.duration && (
-                      <span className="text-xs font-medium text-gray-500 dark:text-gray-400 shrink-0">
+                      <span className="text-[11px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 shrink-0">
                         {entry.duration}
                       </span>
                     )}

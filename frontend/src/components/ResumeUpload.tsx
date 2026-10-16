@@ -85,13 +85,13 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
   return (
     <div
-      className={`w-full bg-white dark:bg-[#111614] border rounded-2xl p-5 shadow-xs transition-colors ${displayError
+      className={`w-full bg-white dark:bg-[#111614] border rounded-2xl p-4 sm:p-5 shadow-xs transition-colors ${displayError
           ? "border-rose-300 dark:border-rose-900/60"
           : "border-gray-200/90 dark:border-[#1c2621]"
         }`}
     >
       {/* Card Header */}
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
         <span className="text-[10px] font-bold tracking-wider text-emerald-800 dark:text-[#34d399] bg-emerald-100 dark:bg-[#14291f] border border-emerald-200 dark:border-[#1d4430] px-1.5 py-0.5 rounded-md">
           01
         </span>
@@ -117,7 +117,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl py-8 px-4 text-center transition cursor-pointer select-none ${displayError
+        className={`border-2 border-dashed rounded-xl py-6 sm:py-8 px-3 sm:px-4 text-center transition cursor-pointer select-none ${displayError
             ? "border-rose-400 dark:border-rose-600/80 bg-rose-50/30 dark:bg-[#1d0e12] ring-2 ring-rose-400/20"
             : "border-gray-200 dark:border-[#1c2621] hover:border-emerald-500/60 dark:hover:border-[#2d6347] bg-gray-50/40 dark:bg-[#0b0f0d] hover:bg-emerald-50/20 dark:hover:bg-[#111915]"
           }`}
